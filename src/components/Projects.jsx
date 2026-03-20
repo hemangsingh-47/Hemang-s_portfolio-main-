@@ -114,7 +114,7 @@ const ProjectCard = ({ project }) => {
 
       <div className="p-6 flex flex-col flex-grow">
         <div style={{ transform: 'translateZ(30px)' }}>
-          <h3 className="text-xl font-bold font-serif text-slate-800 mb-3 group-hover:text-gold transition-colors block leading-tight" data-magnetic>{project.title}</h3>
+          <h3 className="text-xl font-bold font-serif text-slate-800 mb-3 group-hover:text-gold transition-colors block leading-tight">{project.title}</h3>
           <p className="text-slate-600 font-light text-sm mb-6 flex-grow leading-relaxed">
             {project.description}
           </p>
@@ -136,7 +136,6 @@ const ProjectCard = ({ project }) => {
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-text-secondary hover:text-gold transition-colors"
-            data-magnetic
           >
             <Github size={16} /> Code
           </a>
@@ -145,7 +144,6 @@ const ProjectCard = ({ project }) => {
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-text-secondary hover:text-gold transition-colors"
-            data-magnetic
           >
             <ExternalLink size={16} /> Live Demo
           </a>

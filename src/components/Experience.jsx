@@ -135,7 +135,6 @@ const Experience = () => {
                   title: "FinAgent Hackathon – Certificate of Participation"
                 })}
                 className="inline-flex items-center gap-2 text-gold font-bold text-xs tracking-widest uppercase border-b border-gold/30 pb-1 hover:border-gold transition-colors focus:outline-none"
-                data-magnetic
               >
                 <Award size={16} className="-mt-0.5" /> View Certificate
               </button>

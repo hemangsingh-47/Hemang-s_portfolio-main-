@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Github, Linkedin, Youtube, Mail } from 'lucide-react';
 import { AnimatedUnderline } from './TextAnimations';
+import Logo from './Logo';
 
 const Footer = () => {
   const footerRef = useRef(null);
@@ -53,6 +54,9 @@ const Footer = () => {
       <div className="max-w-[1100px] mx-auto px-6 lg:px-12 w-full relative z-10">
         <div className="grid md:grid-cols-2 gap-12 mb-20 w-full">
           <div>
+            <div className="footer-item mb-10">
+              <Logo className="h-10" />
+            </div>
             <h2 className="footer-item font-serif text-4xl md:text-6xl font-bold text-text-primary mb-6">
               Let's craft <br/> something <span className="text-accent italic">beautiful.</span>
             </h2>
@@ -60,7 +64,7 @@ const Footer = () => {
               Always open to discussing product design work or partnership opportunities.
             </p>
             <a 
-              href="mailto:hello@example.com" 
+              href="mailto:hemang.solanki.cg@gmail.com" 
               className="footer-item inline-block border-b border-gold text-gold hover:text-text-primary hover:border-text-primary transition-colors duration-300 pb-1 text-lg mb-8 md:mb-0"
               data-cursor="GREET"
             >

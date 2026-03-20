@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
+import Logo from './Logo';
 
 const Preloader = ({ onStartExit, onComplete }) => {
   const containerRef = useRef(null);
@@ -73,12 +74,9 @@ const Preloader = ({ onStartExit, onComplete }) => {
     >
       <div className="flex flex-col items-center w-full">
         {/* HS. Logo */}
-        <h1 
-          className="preloader-text font-serif text-[64px] tracking-tight leading-none mx-auto text-center font-medium text-text-primary" 
-          style={{ fontWeight: 500 }}
-        >
-          HS.
-        </h1>
+        <div className="preloader-text mx-auto">
+          <Logo className="h-20" showText={false} />
+        </div>
         {/* Thin Gold Line */}
         <div 
           className="h-[1.5px] bg-[#d4a373] preloader-line mx-auto" 

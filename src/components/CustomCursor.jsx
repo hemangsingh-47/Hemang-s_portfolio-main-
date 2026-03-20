@@ -12,7 +12,7 @@ const CustomCursor = () => {
     let mouseY = window.innerHeight / 2;
     let cursorX = mouseX;
     let cursorY = mouseY;
-    let speed = 0.2;
+    let speed = 0.35;
 
     const animateCursor = () => {
       let dx = mouseX - cursorX;
@@ -52,23 +52,19 @@ const CustomCursor = () => {
         }
         setCursorText(text);
 
-        // Magnetic Pull Logic
+        // Improved Continuous Magnetic Pull
         if (target.hasAttribute('data-magnetic')) {
           const rect = target.getBoundingClientRect();
           const targetX = rect.left + rect.width / 2;
           const targetY = rect.top + rect.height / 2;
           
-          const magnetTriggerDist = 100;
-          const dist = Math.hypot(mouseX - targetX, mouseY - targetY);
-          
-          if (dist < magnetTriggerDist) {
-            gsap.to(target, {
-              x: (mouseX - targetX) * 0.4,
-              y: (mouseY - targetY) * 0.4,
-              duration: 0.5,
-              ease: 'power3.out'
-            });
-          }
+          // Smoother, less aggressive pull
+          gsap.to(target, {
+            x: (mouseX - targetX) * 0.2,
+            y: (mouseY - targetY) * 0.2,
+            duration: 0.4,
+            ease: 'power2.out'
+          });
         }
       } else {
         setIsHovering(false);

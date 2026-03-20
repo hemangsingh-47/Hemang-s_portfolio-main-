@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Home, User, Briefcase, Mail } from 'lucide-react';
 import gsap from 'gsap';
 import ThemeToggle from './ThemeToggle';
+import Logo from './Logo';
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -20,24 +21,25 @@ const Navbar = () => {
     { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
   ];
 
-  // Scatter hover effect
+  // Professional stagger hover effect
   const handleMouseEnter = (e) => {
     const letters = e.currentTarget.querySelectorAll('.nav-letter');
+    gsap.killTweensOf(letters);
     gsap.to(letters, {
-      y: () => (Math.random() - 0.5) * 10,
-      x: () => (Math.random() - 0.5) * 10,
-      rotationZ: () => (Math.random() - 0.5) * 30,
+      y: -5,
+      opacity: 0.7,
       duration: 0.2,
-      ease: 'power1.out',
-    });
-    gsap.to(letters, {
-      y: 0,
-      x: 0,
-      rotationZ: 0,
-      duration: 0.5,
-      delay: 0.2,
-      ease: 'elastic.out(1, 0.3)',
-      stagger: 0.02
+      stagger: 0.02,
+      ease: 'power2.out',
+      onComplete: () => {
+        gsap.to(letters, {
+          y: 0,
+          opacity: 1,
+          duration: 0.4,
+          stagger: 0.01,
+          ease: 'elastic.out(1, 0.5)',
+        });
+      }
     });
   };
 
@@ -46,8 +48,8 @@ const Navbar = () => {
       {/* Desktop Header */}
       <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 hidden md:block ${scrolled ? 'glass-nav py-3 shadow-sm' : 'bg-transparent py-5'}`}>
         <div className="max-w-[1100px] mx-auto px-6 lg:px-12 flex justify-between items-center">
-          <a href="#" className="font-serif text-2xl font-bold tracking-tight text-text-primary relative z-10" data-magnetic>
-            HS<span className="text-gold">.</span>
+          <a href="#" className="relative z-10 block transition-transform duration-300 hover:scale-105 active:scale-95">
+            <Logo />
           </a>
           
           <nav className="flex items-center gap-8 relative z-10">
@@ -76,8 +78,8 @@ const Navbar = () => {
       {/* Mobile Top Bar (Logo & Theme Toggle) */}
       <div className={`md:hidden fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
         <div className="px-6 flex justify-between items-center">
-          <a href="#" className="font-serif text-2xl font-bold tracking-tight text-text-primary">
-            HS<span className="text-accent">.</span>
+          <a href="#" className="relative z-10 block transition-transform duration-300 hover:scale-105 active:scale-95">
+            <Logo className="h-7" />
           </a>
           <ThemeToggle />
         </div>
