@@ -1,0 +1,97 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { Home, User, Briefcase, Mail } from 'lucide-react';
+import gsap from 'gsap';
+import ThemeToggle from './ThemeToggle';
+
+const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navLinks = [
+    { name: 'About', href: '#about', icon: <User size={20} /> },
+    { name: 'Skills', href: '#skills', icon: <Briefcase size={20} /> },
+    { name: 'Projects', href: '#projects', icon: <Briefcase size={20} /> },
+    { name: 'Content', href: '#content', icon: <Home size={20} /> },
+    { name: 'Contact', href: '#contact', icon: <Mail size={20} /> },
+  ];
+
+  // Scatter hover effect
+  const handleMouseEnter = (e) => {
+    const letters = e.currentTarget.querySelectorAll('.nav-letter');
+    gsap.to(letters, {
+      y: () => (Math.random() - 0.5) * 10,
+      x: () => (Math.random() - 0.5) * 10,
+      rotationZ: () => (Math.random() - 0.5) * 30,
+      duration: 0.2,
+      ease: 'power1.out',
+    });
+    gsap.to(letters, {
+      y: 0,
+      x: 0,
+      rotationZ: 0,
+      duration: 0.5,
+      delay: 0.2,
+      ease: 'elastic.out(1, 0.3)',
+      stagger: 0.02
+    });
+  };
+
+  return (
+    <>
+      {/* Desktop Header */}
+      <header className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 hidden md:block ${scrolled ? 'glass-nav py-3 shadow-sm' : 'bg-transparent py-5'}`}>
+        <div className="max-w-[1100px] mx-auto px-6 lg:px-12 flex justify-between items-center">
+          <a href="#" className="font-serif text-2xl font-bold tracking-tight text-text-primary relative z-10" data-magnetic>
+            HS<span className="text-gold">.</span>
+          </a>
+          
+          <nav className="flex items-center gap-8 relative z-10">
+            {navLinks.map((link) => (
+              <a 
+                key={link.name} 
+                href={link.href}
+                className="font-medium text-sm text-text-secondary hover:text-gold transition-colors relative group"
+                onMouseEnter={handleMouseEnter}
+              >
+                <span className="flex overflow-hidden">
+                  {link.name.split('').map((char, i) => (
+                    <span key={i} className="nav-letter inline-block origin-center">{char}</span>
+                  ))}
+                </span>
+                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gold transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
+            <div className="pl-4 border-l border-sage/20">
+              <ThemeToggle />
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      {/* Mobile Top Bar (Logo & Theme Toggle) */}
+      <div className={`md:hidden fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${scrolled ? 'glass-nav py-4' : 'bg-transparent py-6'}`}>
+        <div className="px-6 flex justify-between items-center">
+          <a href="#" className="font-serif text-2xl font-bold tracking-tight text-text-primary">
+            HS<span className="text-accent">.</span>
+          </a>
+          <ThemeToggle />
+        </div>
+      </div>
+
+      {/* Mobile Bottom Bar */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 z-[100] glass-nav rounded-full px-6 py-3 shadow-lg border border-sage/20 flex justify-between items-center">
+        <a href="#hero" className="text-slate-500 hover:text-gold transition-colors p-2"><Home size={22} /></a>
+        <a href="#about" className="text-slate-500 hover:text-gold transition-colors p-2"><User size={22} /></a>
+        <a href="#projects" className="text-slate-500 hover:text-gold transition-colors p-2"><Briefcase size={22} /></a>
+        <a href="#contact" className="text-slate-500 hover:text-gold transition-colors p-2"><Mail size={22} /></a>
+      </div>
+    </>
+  );
+};
+
+export default Navbar;

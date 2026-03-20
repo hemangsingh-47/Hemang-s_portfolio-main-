@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #fefae0;
+  --bg-secondary: #faedcd;
+  --bg-tertiary: #e9edc9;
+  --accent: #d4a373;
+  --accent-hover: #c4936a;
+  --text-primary: #1a1a2e;
+  --text-secondary: #4a4a6a;
+  --text-muted: #8a8070;
+  --border: #ccd5ae;
+  --card-bg: #f5f0d5;
+  --nav-bg: rgba(254, 250, 224, 0.85);
+  --footer-bg: #1a1a2e;
+}
+
+[data-theme="dark"] {
+  --bg-primary: #0f0f1a;
+  --bg-secondary: #1a1a2e;
+  --bg-tertiary: #16213e;
+  --accent: #d4a373;
+  --accent-hover: #e8b88a;
+  --text-primary: #fefae0;
+  --text-secondary: #ccd5ae;
+  --text-muted: #a0a0b0;
+  --border: #2a2a4a;
+  --card-bg: #1e1e32;
+  --nav-bg: rgba(15, 15, 26, 0.85);
+  --footer-bg: #0a0a14;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Custom Cursor Styles */
+body, a, button, [role="button"] {
+  cursor: none !important;
+}
+
+#custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: var(--accent); /* gold */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.15s ease-out, background-color 0.2s ease, width 0.2s ease, height 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+#custom-cursor.hovering {
+  transform: translate(-50%, -50%) scale(8);
+  background-color: var(--accent);
+  mix-blend-mode: normal;
+  opacity: 0.15;
+  border: 1px solid var(--accent);
+  backdrop-filter: blur(2px);
+}
+
+/* Scrollbar tweaks */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--border);
+}
+
+/* Custom Utilities for frosted glass */
+.glass-nav {
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(var(--border-rgb, 204, 213, 174), 0.2);
+}
+
+.glass-card {
+  background-color: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.glass-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,46 @@
+.theme-toggle {
+  width: 52px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--border, #ccd5ae);
+  border: none;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  transition: background 0.3s ease;
+  flex-shrink: 0;
+  outline: none;
+}
+.theme-toggle.dark {
+  background: #2a2a3d;
+}
+.toggle-knob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg-primary, #fefae0);
+  position: absolute;
+  left: 4px;
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}
+.theme-toggle.dark .toggle-knob {
+  transform: translateX(24px);
+  background: var(--bg-primary, #0f0f1a);
+}
+.toggle-icon {
+  position: absolute;
+  font-size: 14px;
+  color: #1a1a2e;
+  right: 6px;
+  transition: opacity 0.3s ease, color 0.3s ease;
+  line-height: 1;
+  pointer-events: none;
+}
+.theme-toggle.dark .toggle-icon {
+  right: auto;
+  left: 6px;
+  color: #fefae0;
+}

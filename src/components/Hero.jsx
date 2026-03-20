@@ -1,0 +1,105 @@
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { SplitText } from './TextAnimations';
+
+const Hero = () => {
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Staggered Entrance Animation across elements
+      const tl = gsap.timeline({ delay: 0.1 });
+
+      tl.from(".hero-sub", {
+        y: 20,
+        opacity: 0,
+        duration: 0.8,
+        ease: "power3.out"
+      })
+        .from(".hero-btn", {
+          y: 20,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.1,
+          ease: "power3.out"
+        }, "-=0.4");
+
+      // Scroll indicator bounce
+      gsap.to(".scroll-indicator", {
+        y: 10,
+        repeat: -1,
+        yoyo: true,
+        ease: "power1.inOut",
+        duration: 1.5
+      });
+      // Scroll indicator fade out once scrolled
+      gsap.to(".scroll-indicator-wrapper", {
+        opacity: 0,
+        y: 30,
+        duration: 0.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: "#hero",
+          start: "10% top",
+          end: "30% top",
+          scrub: true, // Smoothly link opacity to scroll progress instead of a sudden toggle
+        }
+      });
+
+    }, containerRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section id="hero" ref={containerRef} className="min-h-screen relative flex flex-col justify-center w-full z-10 pt-20">
+      {/* Scroll Indicator - Vanilla Fade Implementation */}
+      <div className="scroll-indicator-wrapper absolute bottom-8 left-1/2 -translate-x-1/2 z-20 pointer-events-none flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center opacity-80">
+          {/* Animated Mouse Icon */}
+          <div className="w-5 h-8 border-[1.5px] border-text-secondary/60 rounded-full relative mb-2 flex justify-center pt-2">
+            <div className="w-1 h-1 bg-accent rounded-full animate-bounce"></div>
+          </div>
+          <span className="text-[9px] tracking-[0.4em] uppercase text-text-secondary font-bold ml-1">Scroll</span>
+        </div>
+        {/* Animated Vertical Line */}
+        <div className="w-[1px] h-12 bg-gradient-to-b from-text-secondary/40 to-transparent relative overflow-hidden">
+          <div className="scroll-indicator w-full h-1/2 bg-accent absolute top-0 left-0"></div>
+        </div>
+      </div>
+
+      <div className="max-w-[1100px] mx-auto px-6 md:px-12 w-full relative z-30">
+        <div className="max-w-3xl">
+
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-text-primary leading-[1.1] mb-8">
+            <SplitText text="Hemang Singh" className="block" delay={0.2} />
+            <span className="text-text-secondary opacity-60 block mt-2">
+              <SplitText text="Solanki" delay={0.4} />
+            </span>
+          </h1>
+
+          <h3 className="hero-sub text-xl md:text-2xl font-light text-text-secondary mb-6 max-w-2xl">
+            Full-Stack Developer & Content Creator.
+          </h3>
+
+          <p className="hero-sub text-base md:text-lg text-text-muted mb-12 max-w-xl text-balance">
+            Full Stack Developer skilled in React, Node.js, and MongoDB, focused on building modern and efficient web applications.
+          </p>
+
+          <div className="flex flex-wrap gap-4">
+            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 py-4 bg-text-primary text-bg-primary font-bold tracking-wide focus:outline-none transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm" data-magnetic>
+              {/* Liquid fill hover */}
+              <span className="absolute inset-0 w-full h-full bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></span>
+              <span className="relative z-10 block mix-blend-difference text-white">View Work</span>
+            </a>
+            <a href="#contact" className="hero-btn px-8 py-4 bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1" data-magnetic>
+              Let's Connect
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
