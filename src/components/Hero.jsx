@@ -89,19 +89,19 @@ const Hero = () => {
             I build responsive frontend interfaces and backend-powered web applications using React, Node.js, Express, and MongoDB.
           </p>
 
-          <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 py-4 bg-text-primary text-bg-primary font-bold tracking-wide transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm" data-magnetic>
+          <div className="flex flex-wrap gap-4 items-center">
+            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-text-primary text-bg-primary font-bold tracking-wide transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
               {/* Liquid fill hover */}
               <span className="absolute inset-0 w-full h-full bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></span>
               <span className="relative z-10 block mix-blend-difference text-white">View Projects</span>
             </a>
             
-            <a href="/Resume_Hemang.pdf" target="_blank" rel="noopener noreferrer" className="hero-btn group relative overflow-hidden px-8 py-4 bg-accent text-white font-bold tracking-wide transition-transform duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-sm" data-magnetic>
+            <a href="/Resume_Hemang.pdf" target="_blank" rel="noopener noreferrer" className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-accent text-white font-bold tracking-wide transition-transform duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
               <span className="absolute inset-0 w-full h-full bg-text-primary transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0"></span>
               <span className="relative z-10 block">Resume</span>
             </a>
 
-            <a href="#contact" className="hero-btn px-8 py-4 bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1" data-magnetic>
+            <a href="#contact" className="hero-btn px-8 h-[56px] bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1 inline-flex items-center justify-center" data-magnetic>
               Contact Me
             </a>
           </div>

@@ -125,7 +125,7 @@ const About = () => {
             <div className="relative p-3 border-2 border-accent/30 rounded-[2.2rem] shadow-2xl bg-bg-secondary/20 backdrop-blur-sm transition-transform duration-500 hover:scale-[1.02]">
               <div className="w-full max-w-[320px] aspect-[4/5] rounded-[1.5rem] overflow-hidden">
                 <img 
-                  src="https://github.com/hemangsingh-47.png" 
+                  src="/profile.jpg" 
                   alt="Hemang Singh Solanki" 
                   className="w-full h-full object-cover object-center select-none pointer-events-none transition-transform duration-700"
                 />

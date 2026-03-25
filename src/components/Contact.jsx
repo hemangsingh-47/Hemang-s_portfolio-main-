@@ -1,10 +1,21 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Mail, Github, Linkedin, Twitter, Youtube, Send } from 'lucide-react';
+import { Mail, Github, Linkedin, Twitter, Youtube, Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { AnimatedUnderline } from './TextAnimations';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const sectionRef = useRef(null);
+  const formRef = useRef(null);
+
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'success' | 'error'
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const tl = gsap.timeline({
@@ -31,6 +42,93 @@ const Contact = () => {
     { icon: <Twitter size={20} />, href: "https://x.com/Hemang1541063", label: "X (Twitter)" },
     { icon: <Mail size={20} />, href: "mailto:hemang.solanki.cg@gmail.com", label: "Email" },
   ];
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+    if (status === 'error') {
+      setStatus('idle');
+      setErrorMessage('');
+    }
+  };
+
+  const validateForm = () => {
+    if (!formData.name.trim()) return "Please enter your name.";
+    if (!formData.email.trim()) return "Please enter your email address.";
+    
+    // Basic email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) return "Please enter a valid email address.";
+    
+    if (!formData.subject.trim()) return "Please enter a subject.";
+    if (!formData.message.trim()) return "Please enter your message.";
+    
+    return null;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const errorMsg = validateForm();
+    if (errorMsg) {
+      setStatus('error');
+      setErrorMessage(errorMsg);
+      return;
+    }
+
+    setStatus('loading');
+    
+    // 1) Read from environment variables only (no hardcoding)
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+    // 5) Add console debug logs before sending
+    console.log("SERVICE ID:", serviceId);
+    console.log("TEMPLATE ID:", templateId);
+    console.log("PUBLIC KEY:", publicKey);
+
+    // 6) If any environment variable is missing or undefined, show a helpful error and stop
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("EmailJS Configuration Missing:", { serviceId, templateId, publicKey });
+      setStatus('error');
+      setErrorMessage("Email configuration is missing. Please ensure your .env file is correctly set up and you have restarted your development server.");
+      return;
+    }
+
+    try {
+      // 3) Update the EmailJS send function to use this exact structure
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
+        {
+          publicKey: publicKey,
+        }
+      );
+
+      setStatus('success');
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+      setTimeout(() => {
+        setStatus('idle');
+      }, 5000);
+      
+    } catch (error) {
+      console.error("EmailJS Error Detail:", error);
+      setStatus('error');
+      
+      const detailedError = error?.text || error?.message || "Unknown error";
+      setErrorMessage(
+        `Send failed: ${detailedError}. Please verify your Template ID and Service ID.`
+      );
+    }
+  };
 
   return (
     <section id="contact" ref={sectionRef} className="py-24 md:py-32 relative bg-bg-primary overflow-hidden transition-colors duration-300">
@@ -93,9 +191,22 @@ const Contact = () => {
           {/* RIGHT COLUMN: Contact Form Card */}
           <div className="contact-right">
             <div className="bg-bg-secondary/40 backdrop-blur-sm border border-border-color/30 rounded-2xl p-8 md:p-10 shadow-[0_20px_40px_rgba(212,163,115,0.06)]">
-              {/* NOTE: Replace 'YOUR_FORM_ID_HERE' with your actual Formspree ID */}
-              <form action="https://formspree.io/f/YOUR_FORM_ID_HERE" method="POST" className="flex flex-col gap-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="flex flex-col gap-6" noValidate>
                 
+                {status === 'success' && (
+                  <div className="bg-green-500/10 border border-green-500/30 text-green-600 px-4 py-3 rounded-xl flex items-start gap-3 w-full">
+                    <CheckCircle2 size={20} className="mt-0.5 shrink-0" />
+                    <p className="text-sm font-medium">Message sent successfully! I'll get back to you soon.</p>
+                  </div>
+                )}
+                
+                {status === 'error' && (
+                  <div className="bg-red-500/10 border border-red-500/30 text-red-500 px-4 py-3 rounded-xl flex items-start gap-3 w-full">
+                    <AlertCircle size={20} className="mt-0.5 shrink-0" />
+                    <p className="text-sm font-medium">{errorMessage}</p>
+                  </div>
+                )}
+
                 <div className="flex flex-col md:flex-row gap-6">
                   {/* Name field */}
                   <div className="flex flex-col w-full">
@@ -104,6 +215,8 @@ const Contact = () => {
                       type="text" 
                       id="name" 
                       name="name" 
+                      value={formData.name}
+                      onChange={handleChange}
                       placeholder="Hemang Singh" 
                       required
                       className="w-full bg-bg-primary border border-border-color/30 rounded-xl px-4 py-3 text-text-primary font-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-inner"
@@ -116,6 +229,8 @@ const Contact = () => {
                       type="email" 
                       id="email" 
                       name="email" 
+                      value={formData.email}
+                      onChange={handleChange}
                       placeholder="you@example.com" 
                       required
                       className="w-full bg-bg-primary border border-border-color/30 rounded-xl px-4 py-3 text-text-primary font-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-inner"
@@ -130,6 +245,8 @@ const Contact = () => {
                     type="text" 
                     id="subject" 
                     name="subject" 
+                    value={formData.subject}
+                    onChange={handleChange}
                     placeholder="Let's collaborate on..." 
                     required
                     className="w-full bg-bg-primary border border-border-color/30 rounded-xl px-4 py-3 text-text-primary font-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-inner"
@@ -142,6 +259,8 @@ const Contact = () => {
                   <textarea 
                     id="message" 
                     name="message" 
+                    value={formData.message}
+                    onChange={handleChange}
                     placeholder="Your message..." 
                     required
                     className="w-full min-h-[140px] resize-y bg-bg-primary border border-border-color/30 rounded-xl px-4 py-3 text-text-primary font-light placeholder-text-muted focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all shadow-inner"
@@ -151,12 +270,21 @@ const Contact = () => {
                 {/* Submit Button */}
                 <button 
                   type="submit"
-                  className="w-full group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-sage to-gold hover:from-gold hover:to-sage text-white font-bold tracking-widest uppercase text-sm px-8 py-4 rounded-xl transition-all duration-500 shadow-md hover:shadow-xl hover:-translate-y-1 overflow-hidden"
-                  data-magnetic
+                  disabled={status === 'loading'}
+                  className="w-full group relative inline-flex items-center justify-center gap-3 bg-gradient-to-r from-sage to-gold hover:from-gold hover:to-sage text-white font-bold tracking-widest uppercase text-sm px-8 py-4 rounded-xl transition-all duration-500 shadow-md hover:shadow-xl hover:-translate-y-1 overflow-hidden disabled:opacity-75 disabled:cursor-not-allowed disabled:hover:shadow-md disabled:hover:translate-y-0 disabled:hover:from-sage disabled:hover:to-gold"
+                  data-magnetic={status !== 'loading' ? true : undefined}
                 >
-                  <span className="relative z-10">Send Message</span>
-                  <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
-                  <div className="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
+                  <span className="relative z-10">
+                    {status === 'loading' ? 'Sending...' : 'Send Message'}
+                  </span>
+                  
+                  {status === 'loading' ? (
+                    <Loader2 size={18} className="relative z-10 animate-spin" />
+                  ) : (
+                    <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
+                  )}
+                  
+                  <div className={`absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full transition-transform duration-700 ease-in-out ${status !== 'loading' ? 'group-hover:translate-x-full' : ''}`}></div>
                 </button>
                 
               </form>
@@ -170,3 +298,4 @@ const Contact = () => {
 };
 
 export default Contact;
+
