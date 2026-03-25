@@ -80,23 +80,6 @@ const Experience = () => {
                 </div>
               </div>
 
-              {/* Entry 2 */}
-              <div className="relative pl-16 group">
-                <div className="absolute left-1.5 top-0 w-10 h-10 rounded-full bg-bg-secondary border-2 border-gold flex items-center justify-center text-gold shadow-sm group-hover:bg-gold group-hover:text-bg-primary transition-colors duration-300">
-                  <GraduationCap size={18} />
-                </div>
-                
-                <div className="bg-bg-secondary/40 backdrop-blur-sm border border-border-color/10 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-gold/30 transition-all duration-300">
-                  <span className="inline-block px-3 py-1 bg-gold/10 text-gold text-[10px] font-bold tracking-widest uppercase rounded-full mb-4 border border-gold/20">
-                    2025
-                  </span>
-                  <h4 className="text-xl font-bold font-serif text-slate-800 mb-1 group-hover:text-gold transition-colors">Class 12 (Board)</h4>
-                  <p className="text-accent font-medium text-[11px] mb-4 uppercase tracking-widest">Board of Secondary Education Rajasthan</p>
-                  <p className="text-slate-600 font-light text-sm leading-relaxed">
-                    Achieved an overall percentage of 90.20% in the Senior Secondary Examination. Key subjects included Physics, Chemistry, and Mathematics.
-                  </p>
-                </div>
-              </div>
 
             </div>
           </div>

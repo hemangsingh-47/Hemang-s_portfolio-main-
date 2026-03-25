@@ -42,11 +42,9 @@ const Logo = ({ className = "h-8", showText = true }) => {
       {showText && (
         <div className="flex flex-col leading-none">
           <span className="font-serif font-bold text-lg tracking-tight text-text-primary uppercase">
-            HS Portfolio
+            HS
           </span>
-          <span className="text-[0.6rem] tracking-[0.2em] text-accent uppercase font-medium mt-0.5">
-            Creative | Design
-          </span>
+
         </div>
       )}
     </div>
