@@ -87,12 +87,18 @@ const About = () => {
           <div className="md:col-span-7 relative z-20 flex flex-col gap-8 order-2 md:order-1">
             <div>
               <p className="about-reveal text-lg text-slate-600 leading-relaxed mb-6 font-light text-balance">
-                <strong className="font-medium text-slate-800">Hemang Singh Solanki.</strong><br/>
-                I am a dedicated Full Stack Web Developer with a strong foundation in modern web technologies such as React, Node.js, Express, and MongoDB. I specialize in building scalable and performant applications with clean UI/UX.
+                I’m a 2nd semester student who enjoys building modern web applications and learning full-stack development. I’m currently focused on improving my backend skills, building MERN stack projects, and creating clean, user-friendly digital experiences.
               </p>
-              <p className="about-reveal text-lg text-slate-600 leading-relaxed font-light text-balance">
-                I am passionate about solving real-world problems, participating in hackathons, and continuously learning to stay ahead in the tech industry.
-              </p>
+              
+              <div className="about-reveal mb-8">
+                <p className="text-xs font-bold tracking-widest text-slate-400 uppercase mb-4">What I focus on</p>
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-slate-600 font-medium tracking-wide">
+                  <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-accent/60"></span> Full Stack Web Development</li>
+                  <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-accent/60"></span> Backend APIs and Databases</li>
+                  <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-accent/60"></span> Clean UI & Responsive Design</li>
+                  <li className="flex items-center gap-3"><span className="w-1.5 h-1.5 rounded-full bg-accent/60"></span> Real-world Projects</li>
+                </ul>
+              </div>
             </div>
             
             {/* Animated Stats Row */}

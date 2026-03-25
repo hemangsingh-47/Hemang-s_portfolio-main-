@@ -40,10 +40,14 @@ const Experience = () => {
       <div className="max-w-[1100px] mx-auto px-4 z-10 relative">
         {/* Section Header */}
         <div className="mb-16 md:mb-20 text-center md:text-left">
+          <p className="text-accent font-bold tracking-widest uppercase text-xs mb-3 flex items-center justify-center md:justify-start gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent)]"></span>
+            Developer Snapshot
+          </p>
           <h2 className="font-serif text-4xl md:text-5xl font-bold text-slate-800 mb-6">
-            Experience & <span className="text-accent italic font-light"><AnimatedUnderline delay={0.2}>Education</AnimatedUnderline></span>
+            Proof of <span className="text-accent italic font-light"><AnimatedUnderline delay={0.2}>Work</AnimatedUnderline></span>
           </h2>
-          <p className="text-slate-600 font-light text-lg">My academic journey and professional experience so far.</p>
+          <p className="text-slate-600 font-light text-lg">My academic journey, achievements, and dedication to coding.</p>
         </div>
 
         {/* Two Column Layout */}
@@ -122,6 +126,7 @@ const Experience = () => {
                 <Award size={16} className="-mt-0.5" /> View Certificate
               </button>
             </div>
+
 
           </div>
 

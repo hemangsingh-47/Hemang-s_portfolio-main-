@@ -71,29 +71,38 @@ const Hero = () => {
       <div className="max-w-[1100px] mx-auto px-6 md:px-12 w-full relative z-30">
         <div className="max-w-3xl">
 
-          <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-text-primary leading-[1.1] mb-8">
+          {/* Availability Badge */}
+          <div className="hero-sub mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-bold uppercase tracking-widest backdrop-blur-sm self-start">
+            <span className="w-2 h-2 rounded-full bg-accent animate-pulse shadow-[0_0_8px_var(--accent)]"></span>
+            Open to internships, hackathons & collaboration
+          </div>
+
+          <h1 className="font-serif text-5xl md:text-7xl lg:text-[5.5rem] font-bold text-text-primary leading-[1.1] mb-6">
             <SplitText text="Hemang Singh" className="block" delay={0.2} />
-            <span className="text-text-secondary opacity-60 block mt-2">
-              <SplitText text="Solanki" delay={0.4} />
-            </span>
           </h1>
 
-          <h3 className="hero-sub text-xl md:text-2xl font-light text-text-secondary mb-6 max-w-2xl">
-            Full-Stack Developer & Content Creator.
+          <h3 className="hero-sub text-xl md:text-2xl font-medium text-text-secondary mb-6 max-w-2xl bg-gradient-to-r from-text-primary to-text-secondary bg-clip-text text-transparent">
+            Full Stack Web Developer | 2nd Semester Student
           </h3>
 
           <p className="hero-sub text-base md:text-lg text-text-muted mb-12 max-w-xl text-balance">
-            Full Stack Developer skilled in React, Node.js, and MongoDB, focused on building modern and efficient web applications.
+            I build responsive frontend interfaces and backend-powered web applications using React, Node.js, Express, and MongoDB.
           </p>
 
           <div className="flex flex-wrap gap-4">
-            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 py-4 bg-text-primary text-bg-primary font-bold tracking-wide focus:outline-none transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm" data-magnetic>
+            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 py-4 bg-text-primary text-bg-primary font-bold tracking-wide transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm" data-magnetic>
               {/* Liquid fill hover */}
               <span className="absolute inset-0 w-full h-full bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></span>
-              <span className="relative z-10 block mix-blend-difference text-white">View Work</span>
+              <span className="relative z-10 block mix-blend-difference text-white">View Projects</span>
             </a>
+            
+            <a href="/Resume_Hemang.pdf" target="_blank" rel="noopener noreferrer" className="hero-btn group relative overflow-hidden px-8 py-4 bg-accent text-white font-bold tracking-wide transition-transform duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-sm" data-magnetic>
+              <span className="absolute inset-0 w-full h-full bg-text-primary transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0"></span>
+              <span className="relative z-10 block">Resume</span>
+            </a>
+
             <a href="#contact" className="hero-btn px-8 py-4 bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1" data-magnetic>
-              Let's Connect
+              Contact Me
             </a>
           </div>
         </div>

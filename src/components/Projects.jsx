@@ -6,27 +6,42 @@ import { AnimatedUnderline } from './TextAnimations';
 const curatedProjects = [
   {
     num: "01",
-    title: "FleetFlow — Smart Fleet Management Dashboard",
-    description: "Modern, interactive fleet management dashboard with real-time data visualization.",
-    tags: ["React.js", "Tailwind CSS", "Framer Motion", "Lucide React", "Chart.js", "Responsive"],
+    title: "FleetFlow Dashboard",
+    summary: "Architected a modern, data-driven fleet management dashboard with real-time analytics and interactive visualization, optimizing operational oversight.",
+    features: [
+      "Real-time state management and data rendering",
+      "Interactive analytics with Chart.js and Framer Motion",
+      "Responsive, clean UI architecture"
+    ],
+    tags: ["React.js", "Tailwind CSS", "Chart.js"],
     code: "https://github.com/hemangsingh-47/oddo_01",
     live: "https://fleet-flow-coding-gita.netlify.app/",
     image: "/fleetflow.jpg"
   },
   {
     num: "02",
-    title: "Eufy Website Clone",
-    description: "A fully responsive and visually accurate clone of the Eufy security products website.",
-    tags: ["HTML5", "CSS3", "Responsive", "UI/UX Design"],
+    title: "Eufy Security Clone",
+    summary: "Engineered a fully responsive clone of the Eufy e-commerce platform, demonstrating strong proficiency in advanced CSS layouts and DOM structure.",
+    features: [
+      "Pixel-perfect UI replication",
+      "Advanced CSS Grid & Flexbox layouts",
+      "Mobile-first responsive methodology"
+    ],
+    tags: ["HTML5", "CSS3", "UI/UX"],
     code: "https://github.com/hemangsingh-47/clone_assignment",
     live: "https://eufyclone.netlify.app/",
     image: "/eufy.jpg"
   },
   {
     num: "03",
-    title: "Moglix Website Clone",
-    description: "An e-commerce platform clone inspired by Moglix, focusing on industrial supply aesthetics and layout.",
-    tags: ["HTML5", "CSS3", "Responsive", "Layout Design"],
+    title: "Moglix Platform Clone",
+    summary: "Developed a structural clone of the Moglix industrial e-commerce site, focusing on complex navigation patterns and product grid architectures.",
+    features: [
+      "Complex nested navigation layouts",
+      "Scalable product grid systems",
+      "Cross-browser compatibility"
+    ],
+    tags: ["HTML5", "CSS3", "Layout Design"],
     code: "https://github.com/hemangsingh-47/clone_assignment",
     live: "https://moglix-by-hemang.netlify.app/",
     image: "/moglix.jpg"
@@ -114,16 +129,29 @@ const ProjectCard = ({ project }) => {
 
       <div className="p-6 flex flex-col flex-grow">
         <div style={{ transform: 'translateZ(30px)' }}>
-          <h3 className="text-xl font-bold font-serif text-slate-800 mb-3 group-hover:text-gold transition-colors block leading-tight">{project.title}</h3>
-          <p className="text-slate-600 font-light text-sm mb-6 flex-grow leading-relaxed">
-            {project.description}
+          <h3 className="text-xl font-bold font-serif text-slate-800 mb-2 group-hover:text-gold transition-colors block leading-tight">{project.title}</h3>
+          
+          <p className="text-slate-600 font-medium text-[13px] mb-4 leading-relaxed">
+            {project.summary}
           </p>
+
+          {/* Key Features List */}
+          <div className="mb-5 space-y-1">
+            <p className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-2">Key Features</p>
+            <ul className="text-xs text-slate-500 font-light space-y-1.5 list-none pl-0">
+              {project.features.map((feature, idx) => (
+                <li key={idx} className="flex items-start gap-2">
+                  <span className="text-accent mt-[1px] opacity-70">▹</span> {feature}
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
         
         {/* Tech tags */}
-        <div className="flex flex-wrap gap-2 mb-8 mt-auto" style={{ transform: 'translateZ(20px)' }}>
+        <div className="flex flex-wrap gap-2 mb-6 mt-auto" style={{ transform: 'translateZ(20px)' }}>
           {project.tags.map((tag, i) => (
-            <span key={i} className="px-2.5 py-1 bg-transparent border border-border-color/30 text-text-secondary text-[10px] font-mono tracking-wider uppercase rounded-full">
+            <span key={i} className="px-2.5 py-1 bg-transparent border border-border-color/40 text-text-secondary text-[9px] font-bold tracking-widest uppercase rounded-full">
               {tag}
             </span>
           ))}

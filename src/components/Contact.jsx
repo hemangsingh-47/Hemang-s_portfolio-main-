@@ -51,7 +51,7 @@ const Contact = () => {
               Let's <span className="text-accent italic font-light"><AnimatedUnderline delay={0.2}>Connect</AnimatedUnderline></span>
             </h2>
             <p className="text-slate-600 font-light text-lg mb-8 leading-relaxed max-w-md">
-              I'm always open to discussing web development work, creative ideas, or new opportunities. Drop me a message — I'll respond as soon as I can.
+              Have an idea, collaboration, or opportunity? Let's connect. I am actively seeking internships and full-stack development roles where I can contribute and grow.
             </p>
 
             <div className="mb-12 flex items-start gap-4">
