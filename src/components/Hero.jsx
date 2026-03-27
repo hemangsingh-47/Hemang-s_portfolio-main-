@@ -1,9 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { SplitText } from './TextAnimations';
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
   const containerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleNavClick = (path) => {
+    navigate(path);
+    window.scrollTo({ top: 0, behavior: 'auto' });
+  };
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -45,7 +52,6 @@ const Hero = () => {
           scrub: true, // Smoothly link opacity to scroll progress instead of a sudden toggle
         }
       });
-
     }, containerRef);
 
     return () => ctx.revert();
@@ -90,20 +96,20 @@ const Hero = () => {
           </p>
 
           <div className="flex flex-wrap gap-4 items-center">
-            <a href="#projects" className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-text-primary text-bg-primary font-bold tracking-wide transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
+            <button onClick={() => handleNavClick('/projects')} className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-text-primary text-bg-primary font-bold tracking-wide transition-transform duration-300 shadow-lg hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
               {/* Liquid fill hover */}
               <span className="absolute inset-0 w-full h-full bg-accent transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out z-0"></span>
               <span className="relative z-10 block mix-blend-difference text-white">View Projects</span>
-            </a>
-            
-            <a href="/Resume_Hemang.pdf" target="_blank" rel="noopener noreferrer" className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-accent text-white font-bold tracking-wide transition-transform duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
+            </button>
+
+            <button onClick={() => window.open('/Resume_Hemang.pdf', '_blank')} className="hero-btn group relative overflow-hidden px-8 h-[56px] bg-accent text-white font-bold tracking-wide transition-transform duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 rounded-sm inline-flex items-center justify-center" data-magnetic>
               <span className="absolute inset-0 w-full h-full bg-text-primary transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-500 ease-in-out z-0"></span>
               <span className="relative z-10 block">Resume</span>
-            </a>
+            </button>
 
-            <a href="#contact" className="hero-btn px-8 h-[56px] bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1 inline-flex items-center justify-center" data-magnetic>
+            <button onClick={() => handleNavClick('/contact')} className="hero-btn px-8 h-[56px] bg-transparent text-text-primary font-medium border border-border-color/60 hover:border-accent hover:text-accent transition-all duration-300 rounded-sm glass-card hover:-translate-y-1 inline-flex items-center justify-center" data-magnetic>
               Contact Me
-            </a>
+            </button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Logo = ({ className = "h-8", showText = true }) => {
+const Logo = ({ className = "h-8" }) => {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <svg 
@@ -38,15 +38,6 @@ const Logo = ({ className = "h-8", showText = true }) => {
           strokeLinecap="round"
         />
       </svg>
-      
-      {showText && (
-        <div className="flex flex-col leading-none">
-          <span className="font-serif font-bold text-lg tracking-tight text-text-primary uppercase">
-            HS
-          </span>
-
-        </div>
-      )}
     </div>
   );
 };
